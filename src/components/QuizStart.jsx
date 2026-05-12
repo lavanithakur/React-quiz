@@ -14,12 +14,12 @@ function QuizStart({ onStart }) {
         </div>
 
         {/* Title */}
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-3">
+        <h1 className="text-3xl font-bold text-center text-black mb-3">
           React Knowledge Quiz
         </h1>
 
         {/* Description */}
-        <p className="text-gray-500 text-center text-sm mb-6">
+        <p className="text-gray-800 text-center text-sm mb-6">
           Test your knowledge of React, JavaScript, and web development.
           Answer multiple choice questions and see how well you know the fundamentals!
         </p>
