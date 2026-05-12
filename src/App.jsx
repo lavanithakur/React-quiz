@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import QuizStart from "./components/quizstart";
-import Quiz from "./components/quiz";
+import Quiz from "./components/Quiz";  // ✅ capital Q
+
 function App() {
   const [started, setStarted] = useState(false)
 
