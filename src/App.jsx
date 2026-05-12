@@ -1,12 +1,17 @@
-import React from 'react'
-
+import React, { useState } from "react";
+import QuizStart from "./components/quizstart";
+import Quiz from "./components/quiz";
 function App() {
+  const [started, setStarted] = useState(false)
+
   return (
-    <div>
-      <h1 className="text-3xl font-bold text-blue-500">
-  Hello Tailwind!
-</h1>
-    </div>
+    <>
+      {!started ? (
+        <QuizStart onStart={() => setStarted(true)} />
+      ) : (
+        <Quiz />
+      )}
+    </>
   )
 }
 
