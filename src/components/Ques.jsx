@@ -110,5 +110,16 @@ function Ques({ onFinish }) {
     </div>
   )
 }
+const handleNext = () => {
+  if (current + 1 < questions.length) {
+    setCurrent(prev => prev + 1)
+    setSelected(null)
+    setShowExplanation(false)
+  } else {
+    // ✅ pass final score correctly
+    const finalScore = selected === question.correct ? score + 1 : score
+    onFinish && onFinish(finalScore)
+  }
+}
 
 export default Ques
