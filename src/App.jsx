@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import StartScreen from "./components/StartScreen";
 import QuizQuestion from "./components/QuizQuestion";
-import ResultScreen from "./components/ResultScreen";
-import { questions } from "./data/questions";
+import ResultScreen from "./components/Result";
+import { questions } from "./question";
 import "./App.css";
 
 const TOTAL_TIME = 300; // 5 minutes in seconds
@@ -10,7 +10,7 @@ const TOTAL_TIME = 300; // 5 minutes in seconds
 function App() {
   const [screen, setScreen] = useState("start"); // "start" | "quiz" | "result"
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [answers, setAnswers] = useState(Array(questions.length).fill(undefined));
+  const [answers, setAnswers] = useState(Array(question.length).fill(undefined));
   const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
   const [timeUsed, setTimeUsed] = useState(0);
   const timerRef = useRef(null);
@@ -39,7 +39,7 @@ function App() {
   };
 
   const handleStart = () => {
-    setAnswers(Array(questions.length).fill(undefined));
+    setAnswers(Array(question.length).fill(undefined));
     setCurrentIndex(0);
     setTimeLeft(TOTAL_TIME);
     setScreen("quiz");
@@ -52,7 +52,7 @@ function App() {
   };
 
   const handleNext = () => {
-    if (currentIndex === questions.length - 1) {
+    if (currentIndex === question.length - 1) {
       setTimeUsed(TOTAL_TIME - timeLeft);
       clearInterval(timerRef.current);
       setScreen("result");
@@ -67,7 +67,7 @@ function App() {
 
   const handleRestart = () => {
     clearInterval(timerRef.current);
-    setAnswers(Array(questions.length).fill(undefined));
+    setAnswers(Array(question.length).fill(undefined));
     setCurrentIndex(0);
     setTimeLeft(TOTAL_TIME);
     setTimeUsed(0);
@@ -79,15 +79,15 @@ function App() {
       <div className="app-card">
         {screen === "start" && (
           <StartScreen
-            totalQuestions={questions.length}
+            totalQuestions={question.length}
             onStart={handleStart}
           />
         )}
         {screen === "quiz" && (
           <QuizQuestion
-            question={questions[currentIndex]}
+            question={question[currentIndex]}
             questionIndex={currentIndex}
-            totalQuestions={questions.length}
+            totalQuestions={question.length}
             selectedAnswer={answers[currentIndex]}
             onAnswer={handleAnswer}
             onNext={handleNext}
@@ -98,7 +98,7 @@ function App() {
         {screen === "result" && (
           <ResultScreen
             answers={answers}
-            questions={questions}
+            questions={question}
             timeUsed={timeUsed}
             onRestart={handleRestart}
           />
